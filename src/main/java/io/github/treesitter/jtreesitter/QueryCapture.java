@@ -9,4 +9,4 @@ import org.jspecify.annotations.NullMarked;
  * @param node The captured node.
  */
 @NullMarked
-public record QueryCapture(String name, Node node) {}
+public record QueryCapture(String name, Node node, int index) {}

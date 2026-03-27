@@ -22,9 +22,10 @@ public record QueryMatch(@Unsigned int patternIndex, List<QueryCapture> captures
         var captureList = new ArrayList<QueryCapture>(count);
         for (int i = 0; i < count; ++i) {
             var capture = TSQueryCapture.asSlice(matchCaptures, i);
-            var name = captureNames.get(TSQueryCapture.index(capture));
+            int index = TSQueryCapture.index(capture);
+            var name = captureNames.get(index);
             var node = TSNode.allocate(allocator).copyFrom(TSQueryCapture.node(capture));
-            captureList.add(new QueryCapture(name, new Node(node, tree)));
+            captureList.add(new QueryCapture(name, new Node(node, tree), index));
         }
         var patternIndex = TSQueryMatch.pattern_index(match);
         return new QueryMatch(patternIndex, captureList);
